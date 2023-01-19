@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
+import { getEnvironments } from '../helpers';
 const {
   VITE_APP_FIREBASE_API_KEY,
   VITE_APP_FIREBASE_AUTH_DOMAIN,
@@ -13,6 +14,8 @@ const {
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
+const env = getEnvironments();
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
