@@ -1,5 +1,7 @@
 export const fileUpload = async (file) => {
-  if (!file) throw new Error('No file selected.');
+  if (!file) {
+    return null;
+  }
 
   const cloudUrl = `${import.meta.env.VITE_APP_CLOUDINARI_URL}/upload`;
 
@@ -9,6 +11,7 @@ export const fileUpload = async (file) => {
     'upload_preset',
     import.meta.env.VITE_APP_CLOUDINARI_UPLOAD_PRESET
   );
+
   formData.append('file', file);
 
   try {
@@ -17,11 +20,14 @@ export const fileUpload = async (file) => {
       body: formData,
     });
 
-    if (!res.ok) throw new Error('File has not updload.');
+    if (!res.ok) {
+      throw new Error('File has not updload.');
+    }
 
     const cloudRes = await res.json();
     return cloudRes.secure_url;
   } catch (error) {
+    console.log(error.message);
     throw new Error(error.message);
   }
 };
