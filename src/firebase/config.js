@@ -16,7 +16,6 @@ const {
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const env = getEnvironments();
-console.log(env);
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
