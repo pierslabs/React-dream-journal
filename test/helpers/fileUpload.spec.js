@@ -21,25 +21,18 @@ describe('FileUpload', () => {
     const res = await fetch(imageUrl);
     const blob = await res.blob();
     const file = new File([blob], 'image.jpg');
-
     const url = await fileUpload(file);
     expect(typeof url).toBe('string');
 
     const imageId = url.split('/').pop().replace('.png', '');
 
-    const respDelete = await cloudinary.api.delete_resources(
-      [`journal/${imageId}`],
-      {
-        resource_type: 'image',
-      }
-    );
-    console.log(respDelete);
+    await cloudinary.api.delete_resources([`journal/${imageId}`], {
+      resource_type: 'image',
+    });
   });
 
   test('should upload file return NULL ', async () => {
-    const file = new File([], 'image.jpg');
-
-    const url = await fileUpload(file);
+    const url = await fileUpload();
     expect(url).toBe(null);
   });
 });
